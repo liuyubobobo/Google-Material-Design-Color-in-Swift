@@ -171,7 +171,7 @@ public struct GMD{
     
     /// Get a **Primary Color** given the GMDColorType and GMDColorPrimaryLevel
     /// - Returns: The UIColor presents the GMD Primary Color
-    public static func primaryColor(colorType: GMDColorType, level: GMDColorPrimaryLevel) -> UIColor{
+    public static func primaryColor(colorType: GMDColorType, level: GMDColorPrimaryLevel = .Default) -> UIColor{
     
         let colorHex: UInt = getPrimaryColorData(colorType, level: level.rawValue)
         
@@ -193,7 +193,7 @@ public struct GMD{
     ///
     /// That's either the darkTextColor or the lightTextColor
     /// - Returns: The UIColor presents the text color
-    public static func textColor(colorType: GMDColorType, level: GMDColorPrimaryLevel) -> UIColor{
+    public static func textColor(colorType: GMDColorType, level: GMDColorPrimaryLevel = .Default) -> UIColor{
     
         let index: Int = level == .Default ? GMDColorPrimaryLevel.P500.rawValue : level.rawValue
         
