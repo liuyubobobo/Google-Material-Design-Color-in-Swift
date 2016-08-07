@@ -1,6 +1,12 @@
 ## Google Material Design Color
 
-This repo is an implementation for **Google Material Design Colors**. Visit [https://material.google.com/style/color.html](https://material.google.com/style/color.html) to see the details.
+This repo is an implementation for **Google Material Design Colors** by **Swift 2.2**. Visit [https://material.google.com/style/color.html](https://material.google.com/style/color.html) to see the details.
+
+### Demo
+
+The demo is a simple iOS UITableView app to show different GMD Colors.
+
+ 
 
 ### Usage
 
