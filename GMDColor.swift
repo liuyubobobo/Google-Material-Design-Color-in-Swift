@@ -9,9 +9,16 @@
 import UIKit
 
 // MARK: - enum GMDColorType
+/// The enum of Google Material Design Color Type.
+///
+/// Currently, there are **21** colors in total.
+///
+/// They are: Red, Pink, Purple, DeepPurple, Indigo, Blue, LightBlue, Cyan, Teal, Green, LightGreen, Lime, Yellow, Amber, Orange, DeepOrange, Brown, Grey, BlueGrey, Black and White.
 public enum GMDColorType: Int{
     case Red, Pink, Purple, DeepPurple, Indigo, Blue, LightBlue, Cyan, Teal, Green, LightGreen, Lime, Yellow, Amber, Orange, DeepOrange, Brown, Grey, BlueGrey, Black, White;
     
+    /// The total number of Google Material Design Color Type.
+    /// Currently, there are 21 colors in total.
     static var count: Int{
         return GMDColorType.White.rawValue + 1
     }
@@ -20,6 +27,7 @@ public enum GMDColorType: Int{
         return GMDColorType.DeepOrange.rawValue + 1
     }
     
+    /// Name of the Google Material Design Color Type
     var name: String{
         switch self{
         case .Red:          return "Red"
@@ -46,6 +54,7 @@ public enum GMDColorType: Int{
         }
     }
     
+    /// The Primary Color Count of the Google Material Design Color Type
     var primaryLevelCount: Int{
         switch self{
         case .Black, .White:
@@ -55,6 +64,7 @@ public enum GMDColorType: Int{
         }
     }
     
+    /// TheAccent Color Count of the Google Material Design Color Type
     var accentLevelCount: Int{
         if self.rawValue < GMDColorType.accentCount{
             return GMDColorAccentLevel.count
@@ -66,13 +76,24 @@ public enum GMDColorType: Int{
 }
 
 // MARK: - enum GMDColorPrimaryLevel
+/// The enum of GMD Primary Color Level.
+///
+/// Currently, there are **10** different primary color levels for each color type except black and white, which have just one primary color level.
+///
+/// They are: P50, P100, P200, P300, P400, P500, P600, P700, P800, P900.
+///
+/// The **Default** primary color level is equal to **P500**.
 public enum GMDColorPrimaryLevel: Int{
     case Default, P50, P100, P200, P300, P400, P500, P600, P700, P800, P900;
     
+    /// The total number of Google Material Design Primary Color Level.
+    ///
+    /// Currently, there are **11** levels in total, which are **10** different primary color levels plus **Default** color level, which equal to **P500**.
     static var count: Int{
         return GMDColorPrimaryLevel.P900.rawValue + 1
     }
     
+    /// Name of the Google Material Design Primary Color Level.
     var name: String{
         switch self{
         case .Default:  return "Default"
@@ -91,13 +112,22 @@ public enum GMDColorPrimaryLevel: Int{
 }
 
 // MARK: - enum GMDColorAccentLevel
+/// The enum of GMD Accent Color Level.
+///
+/// Currently, there are **4** different primary color levels for each color type except brown, grey, blue grey, black and white, which have no accent color.
+///
+/// They are: A100, A200, A400, A700.
 public enum GMDColorAccentLevel: Int{
     case A100, A200, A400, A700;
     
+    /// The total number of Google Material Design Accent Color Level.
+    ///
+    /// Currently, there are **4** levels in total.
     static var count: Int{
         return GMDColorAccentLevel.A700.rawValue + 1
     }
     
+    /// Name of the Google Material Design Accent Color Level.
     var name: String{
         switch self{
         case .A100: return "A100"
@@ -136,8 +166,11 @@ public extension UIColor{
 }
 
 // MARK: - struct GMD
+// **GMD** is short for **Google Material Design**
 public struct GMD{
     
+    /// Get a **Primary Color** given the GMDColorType and GMDColorPrimaryLevel
+    /// - Returns: The UIColor presents the GMD Primary Color
     public static func primaryColor(colorType: GMDColorType, level: GMDColorPrimaryLevel) -> UIColor{
     
         let colorHex: UInt = getPrimaryColorData(colorType, level: level.rawValue)
@@ -145,6 +178,8 @@ public struct GMD{
         return UIColor(colorHex: colorHex)
     }
     
+    /// Get an **Accent Color** given the GMDColorType and GMDColorAccentLevel
+    /// - Returns: The UIColor presents the GMD Accent Color
     public static func accentColor(colorType: GMDColorType, level: GMDColorAccentLevel) -> UIColor?{
         
         guard let colorHex: UInt = getAccentColorData(colorType, level: level.rawValue) else {
@@ -154,6 +189,10 @@ public struct GMD{
         return UIColor(colorHex: colorHex)
     }
     
+    /// Get the best text color on a GMD primary color given GMDColorType and GMDColorPrimaryLevel
+    ///
+    /// That's either the darkTextColor or the lightTextColor
+    /// - Returns: The UIColor presents the text color
     public static func textColor(colorType: GMDColorType, level: GMDColorPrimaryLevel) -> UIColor{
     
         let index: Int = level == .Default ? GMDColorPrimaryLevel.P500.rawValue : level.rawValue
@@ -161,6 +200,10 @@ public struct GMD{
         return index < GMD.primaryWhiteTextColorBound(colorType) ? GMD.darkTextColor : GMD.lightTextColor
     }
     
+    /// Get the best text color on a GMD accent color given GMDColorType and GMDColorAccentLevel
+    ///
+    /// That's either the darkTextColor or the lightTextColor
+    /// - Returns: The UIColor presents the text color
     public static func textColor(colorType: GMDColorType, level: GMDColorAccentLevel) -> UIColor?{
         
         if level.rawValue < GMDColorType.accentCount{
@@ -171,9 +214,16 @@ public struct GMD{
         
     }
     
+    /// The dark text color on GMD background color
+    ///
+    /// The default value is **#212121**
     public static var darkTextColor: UIColor = UIColor(colorHex: 0x212121)
+    /// The light text color on GMD background color
+    ///
+    /// The default value is **#ffffff**
     public static var lightTextColor: UIColor = UIColor.whiteColor()
     
+    // MARK: - private methods
     private static func getPrimaryColorData(colorType: GMDColorType, level: Int) -> UInt{
         
         switch colorType{
