@@ -6,7 +6,9 @@ This repo is an implementation for **Google Material Design Colors** by **Swift 
 
 The demo is a simple iOS UITableView app to show different GMD Colors.
 
- 
+![GMD Color Type](https://github.com/liuyubobobo/Google-Material-Design-Color/blob/master/ScreenShot/ScreenShot1.png?raw=true)
+
+![GMD Color Detail](https://github.com/liuyubobobo/Google-Material-Design-Color/blob/master/ScreenShot/ScreenShot2.png?raw=true)
 
 ### Usage
 
